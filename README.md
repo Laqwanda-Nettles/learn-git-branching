@@ -71,3 +71,68 @@ git cherry-pick <Commit1> <Commit2> <...>
 In summary, Git cherry-pick is a command used to copy specific commits from one branch to another. It operates by specifying the commits to be copied using their commit IDs. <Commit1>, <Commit2>, etc., represent the commit IDs of the desired commits. This command facilitates the selective transfer of commits to a different branch, allowing for precise integration of changes across the repository. 
 ##### Interactive Rebase
 Git's interactive rebase feature, accessed through the ```git rebase -i``` command, provides a powerful tool for managing commits when you're unsure which ones to select. It opens a UI, typically in a text editor like Vim, displaying the commits to be rebased along with their hashes and messages. This interface allows for a comprehensive review of the commits, facilitating informed decision-making. Additionally, interactive rebase enables advanced actions such as squashing commits, amending commit messages, and even editing the commits themselves, providing extensive control over the rebase process.
+## Day 2: Git Branching Exercises
+### Objective
+Deepen your understanding of Git by completing the final two sections, "A Mixed Bag" and "Advanced Topics," in the "Main" level of Learn Git Branching. This assignment aims to solidify your grasp of advanced Git concepts and operations.  
+![image](https://github.com/Laqwanda-Nettles/learn-git-branching/assets/147118788/cd16de5c-6470-42c9-81ee-a2bd8554b18a)  
+#### A Mixed Bag
+##### Grabbing Just 1 Commit
+When tracking down a bug, developers often insert debug commands and print statements into their code, each placed in separate commits for clarity. Once the bug is fixed, the challenge arises of incorporating only the necessary changes into 
+the main branch, without including the debug commits. To accomplish this, Git provides two commands:   
+```
+git rebase -i & git cherry-pick
+```
+By using interactive rebase ```git rebase -i```, developers can selectively choose which commits to include or exclude from the main branch. Additionally, ```git cherry-pick``` allows for the precise copying of individual commits to another branch, facilitating the integration of specific changes while maintaining code cleanliness. These commands provide effective solutions for managing locally stacked commits and ensuring that only relevant changes are merged into the main branch.
+##### Juggling Commits
+###### Git Rebase -i
+When dealing with stacked commits that need adjustments, such as modifying an earlier commit in the commit history, one solution is using ```git rebase -i```. By reordering commits using ```git rebase -i```, the desired commit can be brought to the top of the history. Then, using ```git commit --amend```, the necessary modification can be made to the commit. Afterward, commits can be reordered back to their original positions. Finally, the main branch can be moved to the updated part of the tree. This process enables developers to effectively juggle commits and make precise modifications even to earlier parts of the commit history.
+###### Git Cherry-pick
+Unlike rebase, which may lead to conflicts due to extensive reordering, cherry-pick allows for the direct placement of a commit onto the HEAD, bypassing potential conflicts. This method simplifies the process of making modifications to specific commits, offering a straightforward solution for managing commit adjustments without the need for extensive reordering.
+##### Git Tags
+Git tags provide a means to permanently mark significant points in a project's history, such as major releases or significant merges. Unlike branches, which are mutable and subject to change, tags serve as permanent markers for specific commits, allowing for easy reference. Tags remain fixed in the commit tree and do not move as additional commits are made, making them stable anchors for historical points. While tags cannot be checked out and worked on like branches, they provide a reliable way to designate important milestones in a project's development.  
+```
+git tag v1 c1
+```
+Named the tag ```v1``` and referenced the commit ```c1``` explicitly. If you leave the commit off, git will just use whatever ```HEAD``` is at.
+##### Git Describe
+Git describe is a command that helps determine the position relative to the nearest tag in the commit history. It aids in understanding your location after navigating numerous commits, such as during debugging sessions or when collaborating with others. The syntax is simple: 
+```
+git describe <ref>
+Output: <tag>_<numCommits>_g<hash>
+```
+<ref> represents any commit reference that Git can resolve. If no reference is specified, Git uses the current checkout location ```HEAD``` by default. The output of the command includes the closest ancestor tag, the number of commits between the tag and the current commit, and the hash of the current commit. This information provides context about the current position in the commit history relative to significant milestones marked by tags.
+![image](https://github.com/Laqwanda-Nettles/learn-git-branching/assets/147118788/cfe1cd6e-05a0-4357-8e3d-4a9af002fa7e) 
+```
+git describe main
+output: v1_2gC2
+git describe side
+output: v2_1_gC4
+```
+#### Advanced Topics
+##### Rebasing over 9000 times
+Solution
+```
+git checkout bugFix
+git rebase main
+git checkout side
+git rebase bugFix
+git checkout another
+git rebase side
+git checkout main; git merge another
+```
+##### Multiple Parents
+The ```^``` modifier in Git allows specifying which parent reference to follow from a merge commit. Unlike the ```~``` modifier, which specifies the number of generations to go back, ```^``` selects the parent reference from a merge commit. By default, Git follows the "first" parent upwards from a merge commit, but specifying a number with ```^``` changes this behavior. For instance, ```git checkout main^``` follows the first parent after the merge commit, while ```git checkout main^2``` selects the second parent. These modifiers can be chained together. For example, 
+```
+git checkout HEAD~^2~2
+Same as ⬇️
+git checkout HEAD~; git checkout HEAD^2; git checkout HEAD~2
+```
+##### Branch Spaghetti
+Solution
+```
+git checkout one
+git cherry-pick c4 c3 c2
+git checkout two
+git cherry-pick c5 c4 c3 c2
+git checkout three; git merge c2
+```
