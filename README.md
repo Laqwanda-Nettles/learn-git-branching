@@ -136,3 +136,53 @@ git checkout two
 git cherry-pick c5 c4 c3 c2
 git checkout three; git merge c2
 ```
+## Day 3: Remote Operations
+### Objectives
+Enhance your skills in managing remote operations in Git by completing the interactive exercises on Learn Git Branching, specifically focusing on remote repositories. This assignment aims to solidify your understanding of advanced remote operations such as push, pull, and managing multiple remotes.
+#### Push & Pull -- Git Remotes!
+##### Clone Intro
+Git remotes are essentially copies of your repository stored on another computer, typically accessible over the Internet. They serve several important purposes:  
+- **Backup:** Remote repositories provide a backup of your local repository, ensuring that your project's history and data are preserved even if something happens to your local machine.
+- **Collaboration:** Remotes enable collaboration by allowing multiple developers to work on the same project. They facilitate sharing code, pulling in changes from others, and contributing to the project's progress.
+- **Social Coding:** With remote repositories, coding becomes a social activity as developers can easily contribute to each other's projects and track changes. Platforms like GitHub visualize activity around remote repositories, enhancing collaboration and project management.
+  
+The command used to set up the environment for remote repository work in Learn Git Branching is ```git clone```, which technically creates a remote repository out of your local one in this context. While ```git clone``` in the real world is used to create local copies of remote repositories, in Learn Git Branching, it helps establish the connection between cloning and remote repository work.
+##### Remote Branches
+Git remote branches, such as ```o/main``` introduced after a git clone, reflect the state of remote repositories and help differentiate between local and public work. These branches are on your local repository and follow the naming convention of ```<remote name>/<branch name>```.  
+When checking out remote branches, Git puts you into detached ```HEAD``` mode, as you can't directly work on these branches; instead, you work elsewhere and then share your changes with the remote. While developers often uses "origin" as the remote name, in Learning Git Branching, it uses "o" as a shorthand due to space constraints. It's essential to remember that in real Git usage, your remote is likely named "origin".
+##### Git Fetchin'
+Git fetch is a command used to synchronize your local repository with changes from a remote repository. It performs two main functions:  
+- **Downloading Commits:** Git fetch retrieves commits from the remote repository that are missing in your local repository.
+- **Updating Remote Branches:** It updates the pointers of your remote branches to reflect the current state of the remote repository.
+    
+Git fetch communicates with the remote repository over the Internet, typically using protocols like ```http://``` or ```git://```.  
+
+It's important to note what ```git fetch``` doesn't do: it does not change anything in your local state. It won't update your main branch or modify your local files. Instead, git fetch serves as a download step, ensuring that your local repository is aware of the latest changes in the remote repository.
+##### Git Pullin'
+Git pull is a command used to fetch remote changes and incorporate them into your local repository in one step. It combines the functionality of git fetch and a merge or rebase operation into a single command. This simplifies the process of updating your local work to reflect changes from the remote repository. With ```git pull```, you can quickly bring your local repository up to date with the latest changes from the remote without having to execute multiple commands manually.
+##### Faking Teamwork
+To simulate collaboration and introduce changes from a remote repository, Learn Git Branching uses the command ```git fakeTeamwork```. This command adds commits to the remote repository, mimicking updates made by collaborators. By default, ```git fakeTeamwork``` adds a commit to the main branch, but you can specify the number of commits or the target branch by appending additional parameters to the command. This allows for easy simulation of various collaboration scenarios, enabling effective learning and practice in managing remote repositories.  
+**Solution**
+```
+git clone
+git fakeTeamwork main 2
+git commit
+git pull
+```
+##### Git Pushin'
+Git push is the command used to upload your local changes to a specified remote repository and update it with your new commits. This action makes your work available for others to download from the remote. Git push essentially "publishes" your work, allowing for collaboration and sharing among team members. The behavior of ```git push``` without any arguments may vary depending on the ```push.default``` setting in Git, the ```upstream``` value is used in the lessons. It's important to check your settings before pushing in your own projects to ensure proper behavior.
+##### Diverged History
+When the history of a repository diverges due to changes made by multiple contributors, git push becomes ambiguous, as it's unclear whether to overwrite the remote with outdated changes or incorporate new changes while ignoring outdated ones. Git prevents pushing in this situation and requires incorporating the latest remote changes before sharing your work.  
+To resolve this, you can base your work off the most recent version of the remote branch. One way to achieve this is through rebasing, which involves fetching the latest changes from the remote ```git fetch```, rebasing your work onto the updated remote branch ```git rebase o/main```, and then pushing your changes ```git push```.   Alternatively, you can use merging by fetching changes ```git fetch```, merging them into your work ```git merge o/main```, and then pushing your changes ```git push```.  
+A more convenient way to update your work is by using ```git pull```, which combines fetching and merging. For a rebase-based update, you can use ```git pull --rebase``` followed by ```git push```. For a merge-based update, you can use regular ```git pull``` followed by ```git push```. 
+##### Locked Main
+If attempts to push commits directly to the main branch are rejected due to a policy requiring the use of pull requests, the rejection message will indicate that the remote rejected the push. This occurs because commits cannot be pushed directly to main under the policy.  
+To resolve this issue, create another branch, such as "feature", and push that branch to the remote repository. Additionally, reset the main branch to be in sync with the remote to avoid conflicts during future pulls.   
+**Solution**
+```
+git checkout -b feature
+git push
+git checkout main
+git reset main^
+git checkout feature
+```
