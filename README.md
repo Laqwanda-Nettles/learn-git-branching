@@ -100,7 +100,7 @@ Git describe is a command that helps determine the position relative to the near
 git describe <ref>
 Output: <tag>_<numCommits>_g<hash>
 ```
-<ref> represents any commit reference that Git can resolve. If no reference is specified, Git uses the current checkout location ```HEAD``` by default. The output of the command includes the closest ancestor tag, the number of commits between the tag and the current commit, and the hash of the current commit. This information provides context about the current position in the commit history relative to significant milestones marked by tags.
+<ref> represents any commit reference that Git can resolve. If no reference is specified, Git uses the current checkout location ```HEAD``` by default. The output of the command includes the closest ancestor tag, the number of commits between the tag and the current commit, and the hash of the current commit. This information provides context about the current position in the commit history relative to significant milestones marked by tags.  
 ![image](https://github.com/Laqwanda-Nettles/learn-git-branching/assets/147118788/cfe1cd6e-05a0-4357-8e3d-4a9af002fa7e) 
 ```
 git describe main
