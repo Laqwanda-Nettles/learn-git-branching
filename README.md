@@ -186,3 +186,32 @@ git checkout main
 git reset main^
 git checkout feature
 ```
+#### To Origin And Beyond -- Advanced Git Remotes!
+##### Push Main!
+In the workflow of integrating feature branches into the main branch, developers typically work on feature branches off of the main branch. Once the feature is ready, it's integrated into the main branch. Developers often only push and pull when on the main branch, ensuring that the main branch stays updated with the remote repository.  
+To update the main branch and push work:
+- Use ```git pull --rebase``` to fetch new commits from the remote repository and rebase your local changes on top of them.
+- Use ```git push``` to publish your local changes to the remote repository.    
+These commands ensure that your local main branch reflects the latest changes from the remote repository and pushes your work to the remote repository.
+##### Merging with Remotes
+The debate between merging and rebasing in the development community revolves around the trade-offs associated with each approach. Here are the general pros and cons of rebasing:   
+Pros:  
+- **Clean Commit Tree:** Rebasing results in a clean commit tree where commits are arranged in a straight line, making it easier to understand the project's history.
+  
+Cons:     
+- **Altered History:** Rebasing modifies the apparent history of the commit tree. Commits may appear to be in a different order than they were originally made, which can be confusing for collaborators trying to understand the chronological sequence of changes.
+  
+Some developers prefer merging because it preserves the original history of the commit tree, while others prefer rebasing for a cleaner commit history. Ultimately, the choice between merging and rebasing comes down to personal preferences and project requirements.
+##### Remote Tracking
+Remote-tracking branches establish a connection between local branches and their corresponding branches on the remote repository. This connection is essential for operations like pull and push, where git determines the target branch for merging or pushing based on this association.     
+During a clone operation, git automatically sets up remote-tracking branches for each branch on the remote repository. For instance, the local main branch typically tracks the o/main branch on the remote. This ensures that the main branch knows where to fetch new changes from and where to push its own changes to.     
+While git sets up this association automatically during cloning, users can also specify it manually. This can be done by either checking out a new branch based on a remote branch ```git checkout -b newBranch o/remoteBranch``` or using the ```git branch -u``` command ```git branch -u o/remoteBranch newBranch```. This allows any branch to have the same implied push destination and merge target as the main branch.
+##### Git Push Arguments
+In Git, the ```git push``` command is used to upload local commits to a remote repository. By default, it determines the remote and the branch to push to based on the properties of the currently checked out branch. However, it can also accept arguments in the form of **<remote>** and **<place>**.      
+**<place>** specifies the source and destination of the commits being pushed.    
+For example, ```git push origin main``` means pushing commits from the local main branch to the main branch on the remote named "origin."       
+To specify both the source and destination independently, a colon refspec is used, in the format **<source>:<destination>**. This provides flexibility to push commits from one local branch to a different branch on the remote repository.     
+For instance, ```git push origin foo^:main``` pushes commits from the foo branch's parent to the main branch on the remote. If the destination branch doesn't exist on the remote, Git will create it when specified in the push command.
+##### Fetch Arguments
+##### Source of nothing
+##### Pull arguments
