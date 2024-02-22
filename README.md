@@ -207,10 +207,10 @@ Remote-tracking branches establish a connection between local branches and their
 During a clone operation, git automatically sets up remote-tracking branches for each branch on the remote repository. For instance, the local main branch typically tracks the o/main branch on the remote. This ensures that the main branch knows where to fetch new changes from and where to push its own changes to.     
 While git sets up this association automatically during cloning, users can also specify it manually. This can be done by either checking out a new branch based on a remote branch ```git checkout -b newBranch o/remoteBranch``` or using the ```git branch -u``` command ```git branch -u o/remoteBranch newBranch```. This allows any branch to have the same implied push destination and merge target as the main branch.
 ##### Git Push Arguments
-In Git, the ```git push``` command is used to upload local commits to a remote repository. By default, it determines the remote and the branch to push to based on the properties of the currently checked out branch. However, it can also accept arguments in the form of **<remote>** and **<place>**.      
-**<place>** specifies the source and destination of the commits being pushed.    
+In Git, the ```git push``` command is used to upload local commits to a remote repository. By default, it determines the remote and the branch to push to based on the properties of the currently checked out branch. However, it can also accept arguments in the form of ```<remote>``` and ```<place>```.      
+```<place>``` specifies the source and destination of the commits being pushed.    
 For example, ```git push origin main``` means pushing commits from the local main branch to the main branch on the remote named "origin."       
-To specify both the source and destination independently, a colon refspec is used, in the format **<source>:<destination>**. This provides flexibility to push commits from one local branch to a different branch on the remote repository.     
+To specify both the source and destination independently, a colon refspec is used, in the format ```<source>:<destination>```. This provides flexibility to push commits from one local branch to a different branch on the remote repository.     
 For instance, ```git push origin foo^:main``` pushes commits from the foo branch's parent to the main branch on the remote. If the destination branch doesn't exist on the remote, Git will create it when specified in the push command.
 ##### Fetch Arguments
 ##### Source of nothing
