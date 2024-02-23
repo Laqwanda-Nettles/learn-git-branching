@@ -139,6 +139,7 @@ git checkout three; git merge c2
 ## Day 3: Remote Operations
 ### Objectives
 Enhance your skills in managing remote operations in Git by completing the interactive exercises on Learn Git Branching, specifically focusing on remote repositories. This assignment aims to solidify your understanding of advanced remote operations such as push, pull, and managing multiple remotes.
+![image](https://github.com/Laqwanda-Nettles/learn-git-branching/assets/147118788/1ed70837-bdeb-4742-9d17-d012475f7d60)
 #### Push & Pull -- Git Remotes!
 ##### Clone Intro
 Git remotes are essentially copies of your repository stored on another computer, typically accessible over the Internet. They serve several important purposes:  
