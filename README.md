@@ -249,3 +249,18 @@ This is a screenshot of GitHub commit:
 It didn't seem to have any conflicts. I'm not sure if I did this correctly. The following are two screenshots for git stash pop.   
 ![image](https://github.com/Laqwanda-Nettles/learn-git-branching/assets/147118788/4433a378-2f83-4861-ae70-28758c0f703a)
 ![image](https://github.com/Laqwanda-Nettles/learn-git-branching/assets/147118788/28a7687b-76e7-4025-aef4-2b00005576c4)
+#### Part 2: Pulling with Rebase Configuration
+- Step 5: Configure Pull Behavior (Local)
+    - Typed ```git config pull.rebase false```
+- Step 6: Create Diverged Changes (Local & Remote)
+    - Made changes on main branch and committed them. I ran into an issue when trying to commit because my branch was behind 1 commit from step 2. To resolve this I had to use ```git pull``` and fix the merge conflict from step 2.
+    - On Github made different changes & commited it.
+
+The following is a screenshot of Github remote commit.    
+![image](https://github.com/Laqwanda-Nettles/learn-git-branching/assets/147118788/cfde567a-b7da-4ec5-abe0-5f6e335ba457)    
+This is a screen shot of my trial & error to resolve the conflict:  
+![image](https://github.com/Laqwanda-Nettles/learn-git-branching/assets/147118788/ebfddaf5-ffec-4f83-bc0a-5e73d455f695)
+- Step 7: Pull and Merge Changes (Local)   
+![image](https://github.com/Laqwanda-Nettles/learn-git-branching/assets/147118788/3ae0531a-4b3d-4917-a901-3ff2612db83b)
+#### Reflection
+Through the exercises involving creating feature branches and switching between them, I've gained a clearer understanding of how branching works in Git. Dealing with conflicts during rebasing and pulling has been challenging. Interacting with remote repositories, both through pushing changes and pulling updates, has reinforced the importance of maintaining synchronization between local and remote branches. Overall, these exercises have deepened my understanding of Git fundamentals. However, at the moment, I am not fully confident in my knowledge of git. But with continual practice, hands-on experience, and mistakes, I do see it as a powerful tool to use.
