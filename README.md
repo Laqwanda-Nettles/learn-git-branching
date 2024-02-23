@@ -221,3 +221,31 @@ It's important to note that specifying a destination allows developers to fetch 
 Git allows for the peculiar use of an empty argument as ```<source>``` in ```git push``` and ```git fetch```. Pushing "nothing" to a remote branch effectively deletes it, as demonstrated by ```git push origin :foo```, where the foo branch on the remote is deleted. Fetching "nothing" to a place locally creates a new branch, illustrated by ```git fetch origin :bar```, where a new branch named bar is created locally.
 ##### Pull arguments
 Git pull is essentially a combination of ```git fetch``` followed by ```git merge```, serving as a shorthand for these two commands. When you specify a branch for ```git pull```, such as ```git pull origin foo```, it's equivalent to ```git fetch origin foo``` followed by ```git merge o/foo```. Similarly, specifying a source and destination in ```git pull```, like ```git pull origin main:foo```, results in the creation of a new local branch named ```foo```, fetching commits from the remote's ```main```, and merging them into the current branch. This functionality allows for efficient updating of multiple branches by running ```git pull``` with the same arguments from different locations.
+## Day 4: Git Rebase
+### Objective
+Strengthen your understanding of Git rebase and pull configuration through hands-on exercises. This assignment involves creating and documenting scenarios that simulate real-world Git workflows.
+#### Part 1 Rebasing and Resolving Conflicts
+- Step 1: Create a Feature Branch (Local)
+    - Cloned repository with ```git clone https://...```
+    - Created new branch with ```git switch -c feature-branch```
+- Step 2: Simulate Main Branch Updates (Local & Remote) 
+    - Switched to main branch, made changes, and committed them. ```git switch main``` ➡️ ```git commit -m "test"``` ➡️ ```git push```
+        - I had trouble with committing my message due to git config problems.   
+    - On Github made changes to the HTML file in the main branch and committed those changes directly on Github.
+      
+The main branch change on the git terminal represented a local environment, whereas the main branch changes in Github represented a remote one.   
+This is a screenshot of GitHub commit:   
+![image](https://github.com/Laqwanda-Nettles/learn-git-branching/assets/147118788/9708ab71-5866-444e-8fc9-4bb0e0158e1c)   
+- Step 3: Stash and Rebase (Local)
+    - Switched back to feature-branch locally ```git switch feature-branch``` and stashed changes ```git stash```
+    - Performed a rebase with ```git rebase main```
+    - Resolved the conflict in VSCode and typed ```git rebase --continue``` in git terminal which opened vim.
+
+  This is a screenshot of rebase completion & conflict resolution:    
+![image](https://github.com/Laqwanda-Nettles/learn-git-branching/assets/147118788/42fa8396-6dff-4c93-9ec9-e1b63c37f62a)
+- Step 4: Apply Stash Changes (Local)
+    - Applied stashed changes with ```git stash pop```
+
+It didn't seem to have any conflicts. I'm not sure if I did this correctly. The following are two screenshots for git stash pop.   
+![image](https://github.com/Laqwanda-Nettles/learn-git-branching/assets/147118788/4433a378-2f83-4861-ae70-28758c0f703a)
+![image](https://github.com/Laqwanda-Nettles/learn-git-branching/assets/147118788/28a7687b-76e7-4025-aef4-2b00005576c4)
